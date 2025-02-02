@@ -1,8 +1,13 @@
-import Home from "../PAGES/Home/home"
+import { Outlet } from "react-router"
+import Navbar from "../Components/navbar"
 
 const MainLayout=()=>{
     return(
-        <Home></Home>
+        <div>
+        <Navbar></Navbar>
+        <Outlet></Outlet>
+        </div>
+
     )
 }
 export default MainLayout

@@ -8,7 +8,7 @@ const Home = () => {
                 backgroundImage: `url(${splashScreen})`,
                 width: '100%',
                 height: '100vh',
-
+                backgroundSize: 'cover',
             }
         }>
             <div className='flex gap-1'>
