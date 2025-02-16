@@ -23,5 +23,11 @@ dist-ssr
 *.sln
 *.sw?
 
+<<<<<<< HEAD
 node_modules
 .env.local
+=======
+
+.env.local
+node_modules
+>>>>>>> e7d3d113b4477930e60bd97e9f5730dfe9d8f8fe
