@@ -15,7 +15,11 @@
     "@lottiefiles/dotlottie-react": "^0.12.3",
     "@mui/material": "^6.4.4",
     "@tailwindcss/vite": "^4.0.3",
+<<<<<<< HEAD
+    "firebase": "^11.3.1",
+=======
     "firebase": "^11.3.0",
+>>>>>>> c4b524f20ec7af53fa620f449cda78804d2405f3
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.54.2",
