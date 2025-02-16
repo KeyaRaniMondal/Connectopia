@@ -37,7 +37,6 @@ const Register = () => {
 
             if (response.ok) {
                 alert("User registered successfully!");
-                // console.log("MongoDB User:", mongoResult);
                 navigate("/");
             } else {
                 alert("Failed to save user to database.");

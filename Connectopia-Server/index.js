@@ -1,21 +1,15 @@
-<<<<<<< HEAD
-=======
-// LW95nKB3nKM6046G
-// Connectopia
->>>>>>> 24c812f4a5903217cbfe61539aceb663dccd2864
+
 const express = require('express')
 const cors = require('cors')
 const app = express()
 require('dotenv').config();
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const port = process.env.PORT || 5000
-<<<<<<< HEAD
 
 app.use(cors());
 app.use(express.json());
 
-=======
->>>>>>> 24c812f4a5903217cbfe61539aceb663dccd2864
+
 const uri = `mongodb+srv://${process.env.db_USER}:${process.env.db_PASSWORD}@cluster0.nj8v5.mongodb.net/yourDatabaseName?retryWrites=true&w=majority&appName=Cluster0`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
