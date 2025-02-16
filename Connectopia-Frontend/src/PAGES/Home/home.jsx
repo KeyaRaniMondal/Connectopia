@@ -9,7 +9,8 @@ const Home = () => {
     const handleGoogleSignIn = () =>{
         googleSignIn()     
             .then(res =>{
-                console.log(res.data);
+                console.log(res);
+                alert("successfully signed up")
                 navigate('/');
             })
         
