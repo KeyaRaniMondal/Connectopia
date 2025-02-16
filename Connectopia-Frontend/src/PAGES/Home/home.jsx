@@ -2,7 +2,11 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import splashScreen from '../../assets/splashScreen.jpg'
 import { TypeAnimation } from 'react-type-animation'
 import useAuth from '../../hooks/useAuth'
+<<<<<<< HEAD
 import { Link, useNavigate } from 'react-router'
+=======
+import { useNavigate } from 'react-router'
+>>>>>>> c4b524f20ec7af53fa620f449cda78804d2405f3
 const Home = () => {
     const {googleSignIn}=useAuth()
     const navigate=useNavigate()
@@ -81,4 +85,9 @@ const Home = () => {
         </div>
     )
 }
+<<<<<<< HEAD
 export default Home
+=======
+export default Home
+
+>>>>>>> c4b524f20ec7af53fa620f449cda78804d2405f3
