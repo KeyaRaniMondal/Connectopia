@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router'
+import { Link, NavLink } from 'react-router'
 import logo from '../assets/logo.JPG'
 
 const Navbar = () => {
@@ -41,7 +41,7 @@ const Navbar = () => {
                         <span className="badge badge-xs badge-primary indicator-item"></span>
                     </div>
                 </button>
-                <a className="btn">Login</a>
+                <Link to="/login" className="btn">Sign In</Link>
             </div>
         </div>
 

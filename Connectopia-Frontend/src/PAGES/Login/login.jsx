@@ -1,37 +1,52 @@
-//import { useForm } from "react-hook-form"
- const Login=()=>{
-//   const {
-//     register,
-//     handleSubmit,
-//     watch,
-//     formState: { errors },
-//   } = useForm()
+import { Input } from "@mui/material";
+import { useForm, Controller } from "react-hook-form";
+import { Link } from "react-router";
 
-
-//   const onSubmit = (data) => console.log(data)
-
-
-//   console.log(watch("example")) 
-
+const Login = () => {
+   const { control, handleSubmit } = useForm({
+      defaultValues: {
+         email: '',
+         password: ''
+      }
+   });
+   const onSubmit = data => console.log(data);
 
    return (
-    <div>
-      
-    </div>
-//     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-//     <form onSubmit={handleSubmit(onSubmit)}>
-//       {/* register your input into the hook by invoking the "register" function */}
-//       <input defaultValue="test" {...register("example")} />
+      <div className="hero bg-base-200 min-h-screen ">
+         <div className="hero-content flex-col min-w-screen">
+            <div className="text-center lg:text-left">
+               <h1 className="text-5xl font-bold mb-10">Login now!</h1>
+            </div>
+            <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+               <div className="card-body">
 
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                     <fieldset className="fieldset">
+                        <label className="fieldset-label">Email</label>
+                        <Controller
+                           name="email"
+                           control={control}
+                           render={({ field }) => <Input {...field} type="email" placeholder="Enter your email address" />}
+                        />
 
-//       {/* include validation with required or other standard HTML validation rules */}
-//       <input {...register("exampleRequired", { required: true })} />
-//       {/* errors will return when field validation fails  */}
-//       {errors.exampleRequired && <span>This field is required</span>}
+                        <label className="fieldset-label">Password</label>
+                        <Controller
+                           name="password"
+                           control={control}
+                           render={({ field }) => <Input {...field} type="password" placeholder="Enter your Password" />}
+                        />
 
-
-//       <input type="submit" />
-//     </form>
-   )
-}
+                        <div><a className="link link-hover">Forgot password?</a></div>
+                        <button type="submit" className="btn btn-neutral mt-4">Login</button>
+                     </fieldset>
+                  </form>
+                  <div className="text-center">
+                     Don't have an account? <Link to='/register' className="text-[#FF9D23] font-bold">Sign Up</Link>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   );
+};
 export default Login
