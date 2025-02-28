@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 
 const Register = () => {
     const navigate=useNavigate()
+    
     const { createUser } = useAuth()
     const { control, handleSubmit } = useForm({
         defaultValues: {

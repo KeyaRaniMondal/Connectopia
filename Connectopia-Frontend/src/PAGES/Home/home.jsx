@@ -3,20 +3,26 @@ import splashScreen from '../../assets/splashScreen.jpg'
 import { TypeAnimation } from 'react-type-animation'
 import useAuth from '../../hooks/useAuth'
 import { Link, useNavigate } from 'react-router' 
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const Home = () => {
     const { googleSignIn } = useAuth()
     const navigate = useNavigate()
+        const auth = getAuth();
+        const provider = new GoogleAuthProvider();
+    
+        const handleGoogleSignIn = () => {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    alert("Google sign-in successful!");
+                    navigate("/");
+                })
+                .catch((err) => {
+                    alert(err.message);
+                });
+        };
 
-    const handleGoogleSignIn = () => {
-        googleSignIn()
-            .then(res => {
-                console.log(res);
-                alert("Successfully signed up");
-                navigate('/');
-            })
-    }
-
+    
     return (
         <div style={{
             backgroundImage: `url(${splashScreen})`,

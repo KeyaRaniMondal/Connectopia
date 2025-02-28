@@ -8,6 +8,8 @@ const Login = () => {
    const{ loginUser}=useContext(AuthContext)
    const [user, setUser] = useState(null);
    const navigate=useNavigate()
+
+
    const { control, handleSubmit } = useForm({
       defaultValues: {
          email: '',
@@ -58,7 +60,7 @@ const Login = () => {
                      </fieldset>
                   </form>
                   <div className="text-center">
-                     Don't have an account? <Link to='/login' className="text-[#FF9D23] font-bold">Sign In</Link>
+                     Don't have an account? <Link to='/register' className="text-[#FF9D23] font-bold">Sign Up</Link>
                   </div>
                </div>
             </div>
