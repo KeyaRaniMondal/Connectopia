@@ -26,12 +26,27 @@ async function run() {
 
     const usersCollection = client.db('ConnectopiaDB').collection('users')
 
-
+    //For creating user API
     app.post('/users', async (req, res) => {
-      const newUser = req.body;
+      const { email, displayName, photoURL } = req.body;
+      const existingUser = await usersCollection.findOne({ email })
+      if (existingUser) {
+        return res.send({ message: 'User already exists', user: existingUser })
+      }
+      const newUser = {
+        email, displayName, photoURL, createAt: new Date()
+      }
       const result = await usersCollection.insertOne(newUser)
       res.send(result)
     })
+
+
+    app.get('/users', async (req, res) => {
+      const result = await usersCollection.find().toArray()
+      res.send(result)
+    })
+
+
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
     // Send a ping to confirm a successful connection
