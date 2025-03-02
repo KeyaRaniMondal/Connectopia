@@ -23,7 +23,7 @@ const Login = () => {
          const result = await loginUser(data.email, data.password);
          alert("Login successful!");
          setUser(result);
-         navigate("/");
+         navigate("/featuredPost");
        } catch (error) {
          alert(error.message);
          // setError({ ...error, email: "Invalid email or password." });

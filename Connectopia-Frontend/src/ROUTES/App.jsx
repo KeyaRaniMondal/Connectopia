@@ -6,6 +6,7 @@ import Register from "../PAGES/Login/register"
 import Profile from "../PAGES/Profile/Profile"
 import UserProfile from "../PAGES/Profile/userProfile"
 import CreatePost from "../PAGES/Posts/createPost"
+import FeaturedPost from "../PAGES/FeaturedPosts/allPosts"
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="featuredPost" element={<FeaturedPost />} />
       </Route>
       <Route path="profile" element={<Profile />}>
         <Route index element={<UserProfile />} />

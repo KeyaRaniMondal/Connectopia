@@ -13,6 +13,7 @@ const Navbar = () => {
     }
     const link = <>
         <NavLink to={'/'}>Home</NavLink>
+        <NavLink to={'/featuredPost'}>Featured</NavLink>
         <NavLink to={'/'}>Add Friend</NavLink>
     </>
     return (

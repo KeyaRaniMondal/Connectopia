@@ -45,7 +45,7 @@ const PostForm = () => {
           type="file"
           className="file-input file-input-neutral w-full"
           placeholder="Caption for post"
-          {...register("photo", { required: true })}
+          {...register("photo")}
         />
       </fieldset>
 
