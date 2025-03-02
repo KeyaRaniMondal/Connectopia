@@ -60,7 +60,7 @@ const Navbar = () => {
                                 </button>
                                 <ul
                                     tabIndex={0}
-                                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
+                                    className="menu menu-sm dropdown-content bg-base-100 text-black rounded-box z-50 mt-3 w-52 p-2 shadow"
                                 >
                                     <li>
                                         <a className="justify-between">
@@ -69,7 +69,7 @@ const Navbar = () => {
                                         </a>
                                     </li>
                                     <li>
-                                        <Link to="dashboard">Dashboard</Link>
+                                        <Link to="profile">Profile</Link>
                                     </li>
                                     <li>
                                         <button onClick={handleLogOut}>Logout</button>
