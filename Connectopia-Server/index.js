@@ -1,8 +1,10 @@
-
 const express = require('express')
 const cors = require('cors')
 const app = express()
 require('dotenv').config();
+// multer for file uploads
+const multer=require('multer')
+const upload=multer({dest:'uploads/'})
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const port = process.env.PORT || 5000
 
@@ -23,8 +25,9 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-
-    const usersCollection = client.db('ConnectopiaDB').collection('users')
+    const connect = client.db('ConnectopiaDB')
+    const usersCollection = connect.collection('users')
+    const userPostsCollection = connect.collection('createdPosts')
 
     //For creating user API
     app.post('/users', async (req, res) => {
@@ -43,6 +46,22 @@ async function run() {
 
     app.get('/users', async (req, res) => {
       const result = await usersCollection.find().toArray()
+      res.send(result)
+    })
+
+
+
+    //creating posts by Users
+    app.post('/createdPosts',upload.single('photo'), async (req, res) => {
+      const { email,caption } = req.body
+      const photo=req.file
+      const user = await usersCollection.findOne({ email })
+      const newPost = {
+        email,caption,
+        photo:photo?photo.path:null,
+        createAt: new Date()
+      }
+      const result = await userPostsCollection.insertOne(newPost)
       res.send(result)
     })
 
