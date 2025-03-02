@@ -2,26 +2,27 @@ import { useForm } from "react-hook-form";
 
 const PostForm = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = async(data) =>{
-const formData=new FormData()
-formData.append("email",data.email)
-formData.append("caption",data.caption)
-formData.append("photo",data.photo)
+  // for submiting posts
+  const onSubmit = async (data) => {
+    const formData = new FormData()
+    formData.append("email", data.email)
+    formData.append("caption", data.caption)
+    formData.append("photo", data.photo[0])
 
-try{
-  const response=await fetch("/createdPosts",{
-    method:"POST",
-    body:formData
-  })
-  if(!response.ok){
-    throw new Error("Failed to create post")
-  }
-  const result=await response.json()
-  console.log("post created",result)
-}
-catch(error){
-console.error("Error creating post: ",error)
-}
+    try {
+      const response = await fetch("http://localhost:5000/createdPosts", {
+        method: "POST",
+        body: formData
+      })
+      if (!response.ok) {
+        throw new Error("Failed to create post")
+      }
+      const result = await response.json()
+      console.log("post created", result)
+    }
+    catch (error) {
+      console.error("Error creating post: ", error)
+    }
   }
 
   return (
@@ -44,7 +45,7 @@ console.error("Error creating post: ",error)
           type="file"
           className="file-input file-input-neutral w-full"
           placeholder="Caption for post"
-          {...register("caption")}
+          {...register("photo", { required: true })}
         />
       </fieldset>
 
