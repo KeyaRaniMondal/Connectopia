@@ -38,7 +38,7 @@ const Register = () => {
 
             if (response.ok) {
                 alert("User registered successfully!");
-                navigate("/");
+                navigate("/featuredPosts");
             } else {
                 alert("Failed to save user to database.");
             }

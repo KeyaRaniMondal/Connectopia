@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const FeaturedPost = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const{user}=useContext(AuthContext)
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -35,7 +37,18 @@ const FeaturedPost = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
       {posts.map((post) => (
-        <div key={post._id} className="card bg-base-100 w-auto shadow-sm">
+        <div key={post._id} className="card bg-base-100 w-96 shadow-sm">
+          <div className="flex ml-10 gap-5 mt-2">
+            <div className="avatar">
+              <div className="ring-primary ring-offset-base-100 w-14 rounded-full ring ring-offset-2">
+                <img src={user.photoURL}/>
+              </div>
+            </div>
+            <h2 className="card-title">
+              {post.caption || "Card Title"}
+            </h2>
+          </div>
+
           {
             post.photo && (
               <figure>
@@ -45,10 +58,6 @@ const FeaturedPost = () => {
           }
 
           <div className="card-body">
-            <h2 className="card-title">
-              {post.caption || "Card Title"}
-              {post.isNew && <div className="badge badge-secondary">NEW</div>}
-            </h2>
             <p>{post.description || "A card component has a figure, a body part, and inside body there are title and actions parts"}</p>
             <div className="card-actions justify-end">
               {post.tags?.map((tag, index) => (

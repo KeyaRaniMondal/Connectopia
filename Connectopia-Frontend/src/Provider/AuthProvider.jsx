@@ -20,11 +20,13 @@ const AuthProvider = ({ children }) => {
     // to save informations in databse
     const saveUserToDb = async (user) => {
         const { email, displayName, photoURL } = user
-        await fetch('http://localhost:5000/users', {
+        const response = await fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, displayName, photoURL })
         })
+        const data = await response.json()
+        console.log('user saved to db', data)
     }
 
 
@@ -71,10 +73,16 @@ const AuthProvider = ({ children }) => {
     // for google signin
     const googleSignIn = async () => {
         setLoading(true);
-        const result = signInWithPopup(auth, googleProvider)
-        setUser(result.user);
-        await saveUserToDb(result.user)
-        setLoading(false);
+        try {
+            const result = await signInWithPopup(auth, googleProvider);
+            console.log('User object from Google sign-in:', result.user); 
+            setUser(result.user);
+            await saveUserToDb(result.user);
+        } catch (error) {
+            console.error('Error during Google sign-in:', error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const authInfo = {
