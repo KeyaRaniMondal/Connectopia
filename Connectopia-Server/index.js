@@ -84,6 +84,14 @@ async function run() {
       res.send(result)
     })
 
+    app.get('/createdPosts', async (req, res) => {
+      const posts = await userPostsCollection.find().toArray();
+      res.send(posts.map(post => ({
+        ...post,
+        photo: post.photo ? `http://localhost:5000${post.photo}` : null
+      })));
+    });
+    
 
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
