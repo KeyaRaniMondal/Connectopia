@@ -156,16 +156,20 @@
 //   console.log(`server running on port : ${port}`);
 // })
 
-import express from 'express'
-import dotenv from 'dotenv'
-import authRoutes from '../src/routes/auth.route.js'
-import {Connectopia} from './lib/db.js'
-dotenv.config()
-const app= express()
-const PORT=process.env.port
-app.use(express.json())
-app.use("/api/auth",authRoutes)
-app.listen(PORT,()=>{
-  console.log('server is running on port '+PORT)
-  Connectopia()
-})
+import express from 'express';
+import dotenv from 'dotenv';
+import authRoutes from '../src/routes/auth.route.js';
+import { Connectopia } from './lib/db.js';
+
+dotenv.config(); // Load .env file **at the top**
+
+const app = express();
+const PORT = process.env.PORT || 5000; // Default to 5000 if .env is missing
+
+app.use(express.json());
+app.use("/api/auth", authRoutes);
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+  Connectopia();
+});
