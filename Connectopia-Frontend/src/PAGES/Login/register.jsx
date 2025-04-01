@@ -1,19 +1,19 @@
 import { Input } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
-import useAuth from "../../hooks/useAuth";
+// import useAuth from "../../hooks/useAuth";
 
 const Register = () => {
-    const navigate=useNavigate()
+    // const navigate=useNavigate()
     
-    const { createUser } = useAuth()
-    const { control, handleSubmit } = useForm({
-        defaultValues: {
-            userName: '',
-            email: '',
-            password: ''
-        }
-    });
+    // const { createUser } = useAuth()
+    // const { control, handleSubmit } = useForm({
+    //     defaultValues: {
+    //         userName: '',
+    //         email: '',
+    //         password: ''
+    //     }
+    // });
     const onSubmit = async (data) => {
         try {
             const result = await createUser(data.userName, data.email, data.password);

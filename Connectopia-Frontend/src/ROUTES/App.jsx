@@ -7,9 +7,15 @@ import Profile from "../PAGES/ProfilePage/Profile"
 import UserProfile from "../PAGES/ProfilePage/userProfile"
 import CreatePost from "../PAGES/Posts/createPost"
 import FeaturedPost from "../PAGES/FeaturedPosts/allPosts"
+import { useAuthStore } from "../Store/useAuthStore"
+import { useEffect } from "react"
 
 function App() {
 
+  const { authUser, checkAuth } = useAuthStore()
+  useEffect(() => {
+    checkAuth()
+  }, [checkAuth])
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>

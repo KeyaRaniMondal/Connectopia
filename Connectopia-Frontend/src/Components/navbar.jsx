@@ -1,16 +1,16 @@
 import { Link, NavLink, useNavigate } from 'react-router'
 import logo from '../assets/logo.JPG'
-import { useContext } from 'react'
-import { AuthContext } from '../Provider/AuthProvider'
+// import { useContext } from 'react'
+// import { AuthContext } from '../Provider/AuthProvider'
 
 const Navbar = () => {
-    const { user, logOut } = useContext(AuthContext)
-    const navigate = useNavigate()
-    const handleLogOut = () => {
-        logOut()
-            .then(() => navigate('/'))
-            .catch((error) => console.log(error))
-    }
+    // const { user, logOut } = useContext(AuthContext)
+    // const navigate = useNavigate()
+    // const handleLogOut = () => {
+    //     logOut()
+    //         .then(() => navigate('/'))
+    //         .catch((error) => console.log(error))
+    // }
     const link = <>
         <NavLink to={'/'}>Home</NavLink>
         <NavLink to={'/featuredPost'}>Featured</NavLink>
@@ -50,13 +50,13 @@ const Navbar = () => {
                         <span className="badge badge-xs badge-primary indicator-item"></span>
                     </div>
                 </button>
-                {
-                    user ?
-                        (
+                {/* {
+                    user ? */}
+                        {/* ( */}
                             <div className="dropdown dropdown-end">
                                 <button tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                     <div className="w-10 rounded-full">
-                                        <img alt="Avatar" src={user?.photoURL} />
+                                        {/* <img alt="Avatar" src={user?.photoURL} /> */}
                                     </div>
                                 </button>
                                 <ul
@@ -65,23 +65,23 @@ const Navbar = () => {
                                 >
                                     <li>
                                         <a className="justify-between">
-                                            {user?.displayName || "Anonymous"}
+                                            {/* {user?.displayName || "Anonymous"} */}
                                             <span className="badge">New</span>
                                         </a>
                                     </li>
                                     <li>
                                         <Link to="profile">Profile</Link>
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <button onClick={handleLogOut}>Logout</button>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </div>
-                        ) :
+                        {/* ) :
                         (
                             <Link to="/login" className="btn">Sign In</Link>
                         )
-                }
+                } */}
 
             </div>
         </div>

@@ -76,13 +76,13 @@
 // export default FeaturedPost;
 
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../Provider/AuthProvider";
+// import { AuthContext } from "../../Provider/AuthProvider";
 
 const FeaturedPost = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-const{user}=useContext(AuthContext)
+// const{user}=useContext(AuthContext)
   useEffect(() => {
     const fetchPosts = async () => {
       try {

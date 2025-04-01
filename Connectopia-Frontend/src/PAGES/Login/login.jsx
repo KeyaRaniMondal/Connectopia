@@ -2,33 +2,33 @@ import { Input } from "@mui/material";
 import { useContext, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
-import { AuthContext } from "../../Provider/AuthProvider";
+// import { AuthContext } from "../../Provider/AuthProvider";
 
 const Login = () => {
-   const{ loginUser}=useContext(AuthContext)
-   const [user, setUser] = useState(null);
-   const navigate=useNavigate()
+   // const{ loginUser}=useContext(AuthContext)
+   // const [user, setUser] = useState(null);
+   // const navigate=useNavigate()
 
 
-   const { control, handleSubmit } = useForm({
-      defaultValues: {
-         email: '',
-         password: ''
-      }
-   });
-   const onSubmit = async(data) => {
-      console.log(data)
-      try {
+   // const { control, handleSubmit } = useForm({
+   //    defaultValues: {
+   //       email: '',
+   //       password: ''
+   //    }
+   // });
+   // const onSubmit = async(data) => {
+   //    console.log(data)
+   //    try {
        
-         const result = await loginUser(data.email, data.password);
-         alert("Login successful!");
-         setUser(result);
-         navigate("/featuredPost");
-       } catch (error) {
-         alert(error.message);
-         // setError({ ...error, email: "Invalid email or password." });
-       } 
-   };
+   //       const result = await loginUser(data.email, data.password);
+   //       alert("Login successful!");
+   //       setUser(result);
+   //       navigate("/featuredPost");
+   //     } catch (error) {
+   //       alert(error.message);
+   //       // setError({ ...error, email: "Invalid email or password." });
+   //     } 
+   // };
 
    return (
       <div className="hero bg-base-200 min-h-screen ">

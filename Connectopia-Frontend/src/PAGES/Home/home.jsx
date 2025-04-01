@@ -1,15 +1,15 @@
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import splashScreen from '../../assets/splashScreen.jpg'
 import { TypeAnimation } from 'react-type-animation'
-import useAuth from '../../hooks/useAuth'
+// import useAuth from '../../hooks/useAuth'
 import { Link, useNavigate } from 'react-router' 
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useContext } from 'react'
-import { AuthContext } from '../../Provider/AuthProvider'
+// import { AuthContext } from '../../Provider/AuthProvider'
 
 const Home = () => {
-    const { googleSignIn } = useContext(AuthContext)
-    const navigate = useNavigate()
+    // const { googleSignIn } = useContext(AuthContext)
+    // const navigate = useNavigate()
         // const auth = getAuth();
         // const provider = new GoogleAuthProvider();
     
@@ -66,7 +66,8 @@ const Home = () => {
                             </Link>
                         </div>
                         <div className='mb-5'>
-                            <button onClick={googleSignIn} className="btn bg-[#ffffff] text-black border-[#0b5014] w-60">
+                        {/* onClick={googleSignIn} */}
+                            <button  className="btn bg-[#ffffff] text-black border-[#0b5014] w-60">
                                 <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                     <g>
                                         <path d="m0 0H512V512H0" fill="#fff"></path>
