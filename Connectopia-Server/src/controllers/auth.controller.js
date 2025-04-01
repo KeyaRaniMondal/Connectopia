@@ -39,6 +39,7 @@ export const signUp = async (req, res) => {
         res.status(500).json({ message: "Internal server errorr" })
     }
 }
+
 export const login = async (req, res) => {
     const { email, password } = req.body
     try {
@@ -64,6 +65,14 @@ export const login = async (req, res) => {
         res.status(500).jsonn({ message: "intrnal server error" })
     }
 }
+
 export const logout = (req, res) => {
-    res.send('logout route')
+    try {
+        res.cookie("jwt", "", { maxAge: 0 })
+        res.status(200).json({ message: "logged out Successfully" })
+    }
+    catch (error) {
+        console.log("error in logged out controllar", error.message)
+        res.status(500).json({ message: "internal server error" })
+    }
 }
