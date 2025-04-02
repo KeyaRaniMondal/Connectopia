@@ -157,7 +157,9 @@
 // })
 
 import express from 'express';
+import cors from 'cors';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 import authRoutes from '../src/routes/auth.route.js';
 import { Connectopia } from './lib/db.js';
 
@@ -167,6 +169,15 @@ const app = express();
 const PORT = process.env.PORT || 5000; // Default to 5000 if .env is missing
 
 app.use(express.json());
+app.use(cookieParser())
+app.use(cors({
+origin:"http://localhost:5173",
+Credentials:true
+}))
+
+app.get('/',(req,res)=>{
+  res.send("Welcome to Connectopia")
+})
 app.use("/api/auth", authRoutes);
 
 app.listen(PORT, () => {

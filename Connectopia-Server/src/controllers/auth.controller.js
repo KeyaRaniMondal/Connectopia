@@ -76,3 +76,22 @@ export const logout = (req, res) => {
         res.status(500).json({ message: "internal server error" })
     }
 }
+
+export const updateProfile = async (req, res) => {
+    try {
+
+    }
+    catch {
+
+    }
+
+}
+export const checkAuth = (req, res) => {
+    try {
+        res.status(200).json(req.user)
+    }
+    catch (err0r) {
+        console.log("error in checkAuth Controllar".error.message)
+        res.status(500).json({ message: "internal server error" })
+    }
+}
