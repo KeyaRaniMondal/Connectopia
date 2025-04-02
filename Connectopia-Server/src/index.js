@@ -161,12 +161,13 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import authRoutes from '../src/routes/auth.route.js';
+import messageRoutes from '../src/routes/message.route.js';
 import { Connectopia } from './lib/db.js';
 
-dotenv.config(); // Load .env file **at the top**
+dotenv.config(); 
 
 const app = express();
-const PORT = process.env.PORT || 5000; // Default to 5000 if .env is missing
+const PORT = process.env.PORT || 5000; 
 
 app.use(express.json());
 app.use(cookieParser())
@@ -178,7 +179,9 @@ Credentials:true
 app.get('/',(req,res)=>{
   res.send("Welcome to Connectopia")
 })
+
 app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
