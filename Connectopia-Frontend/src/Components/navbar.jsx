@@ -90,6 +90,7 @@
 // }
 // export default Navbar
 import { Link } from "react-router-dom";
+import logo from '../assets/logo.JPG'
 import { LogOut, MessageSquare, Settings, User } from "lucide-react";
 import { useAuthStore } from "../Store/useAuthStore";
 
@@ -98,7 +99,7 @@ const Navbar = () => {
 
   return (
     <header
-      className="bg-base-100 border-b border-base-300 fixed w-full top-0 z-40 
+      className="bg-base-100 border-b border-base-300 bg-linear-to-r  from-[#09122C] via-[#FF9D23] to-[#09122C] fixed w-full top-0 z-40 
     backdrop-blur-lg bg-base-100/80"
     >
       <div className="container mx-auto px-4 h-16">
@@ -106,10 +107,19 @@ const Navbar = () => {
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-all">
               <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                <button className="btn btn-ghost text-xl">
+                  <img src={logo} alt="" className='w-10 ' />
+                  <h2 className='-ml-7 text-black font-bold'>C</h2>
+                </button>
+              </div>
+              <h1 className="text-lg text-white font-bold">Connectopia</h1>
+            </Link>
+            {/* <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-all">
+              <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
                 <MessageSquare className="w-5 h-5 text-primary" />
               </div>
               <h1 className="text-lg font-bold">Chatty</h1>
-            </Link>
+            </Link> */}
           </div>
 
           <div className="flex items-center gap-2">
@@ -132,7 +142,7 @@ const Navbar = () => {
                 </Link>
 
                 <button className="flex gap-2 items-center" onClick={logout}>
-                  <LogOut className="size-5" />
+                  <LogOut className="size-5 text-white" />
                   <span className="hidden sm:inline">Logout</span>
                 </button>
               </>
