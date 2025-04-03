@@ -12,6 +12,7 @@ import { Loader } from "lucide-react"
 import SplashScreen from "../PAGES/Home/splashScreen"
 import SignUpPage from "../PAGES/Login/register"
 import { Toaster } from "react-hot-toast"
+import ProfilePage from "../PAGES/ProfilePage/Profile"
 
 function App() {
 
@@ -36,10 +37,10 @@ function App() {
         <Route path="/login" element={!authUser?<Login />:<Navigate to={'/home'}/>} />
         <Route path="/signup" element={!authUser?<SignUpPage/>:<Navigate to={'/home'}/>} />
         <Route path="/featuredPost" element={<FeaturedPost />} />
-      
+        <Route path="/profile" element={authUser?<ProfilePage/>:<Navigate to={'/login'}/>}/>
       </Route>
-      {/* <Route path="/profile" element={<Profile />}>
-        <Route index element={<UserProfile />} />
+
+        {/*<Route index element={<UserProfile />} />
         <Route path="/createPost" element={<CreatePost />} />
       </Route> */}
     </Routes>
