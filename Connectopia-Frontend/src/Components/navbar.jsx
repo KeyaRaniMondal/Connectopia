@@ -92,6 +92,7 @@
 import { Link } from "react-router-dom";
 import logo from '../assets/logo.JPG'
 import { LogOut, MessageSquare, Settings, User } from "lucide-react";
+import { IoLogoWechat } from "react-icons/io5";
 import { useAuthStore } from "../Store/useAuthStore";
 
 const Navbar = () => {
@@ -140,10 +141,14 @@ const Navbar = () => {
                   <User className="size-5" />
                   <span className="hidden sm:inline">Profile</span>
                 </Link>
+                <Link to={"/chats"} className={`btn btn-sm gap-2`}>
+                <IoLogoWechat className="size-5" />
+                  <span className="hidden sm:inline">Chats</span>
+                </Link>
 
                 <button className="flex gap-2 items-center" onClick={logout}>
                   <LogOut className="size-5 text-white" />
-                  <span className="hidden sm:inline">Logout</span>
+                  <span className="hidden sm:inline text-white">Logout</span>
                 </button>
               </>
             )}
