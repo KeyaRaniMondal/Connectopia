@@ -3,10 +3,12 @@ import { useEffect, useRef } from "react";
 
 // import ChatHeader from "./ChatHeader";
 // import MessageInput from "./MessageInput";
-import MessageSkeleton from "./skeletons/MessageSkeleton";
-import { formatMessageTime } from "../lib/utils";
 import { useAuthStore } from "../../Store/useAuthStore";
 import { useChatStore } from "../../Store/useChatStore";
+import MessageSkeleton from "../../Components/skeletons/messageSkeleton";
+import { formatMessageTime } from "../../lib/utils";
+import ChatHeader from "./chatHeader";
+import MessageInput from "./messageInput";
 
 const ChatContainer = () => {
   const {
@@ -20,13 +22,7 @@ const ChatContainer = () => {
   const { authUser } = useAuthStore();
   const messageEndRef = useRef(null);
 
-  useEffect(() => {
-    getMessages(selectedUser._id);
 
-    subscribeToMessages();
-
-    return () => unsubscribeFromMessages();
-  }, [selectedUser._id, getMessages, subscribeToMessages, unsubscribeFromMessages]);
 
   useEffect(() => {
     if (messageEndRef.current && messages) {

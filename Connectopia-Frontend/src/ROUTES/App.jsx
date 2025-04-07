@@ -33,7 +33,7 @@ function App() {
     <div>
 <Routes>
       <Route path="/" element={<MainLayout />}>
-      <Route path="/" element={<SplashScreen />} />
+      <Route path="/" element={!authUser?<SplashScreen />:<Navigate to={'/home'}/>} />
         <Route path="/home" element={authUser?<Home />:<Navigate to={'/login'}/>} />
         <Route path="/login" element={!authUser?<Login />:<Navigate to={'/home'}/>} />
         <Route path="/signup" element={!authUser?<SignUpPage/>:<Navigate to={'/home'}/>} />
