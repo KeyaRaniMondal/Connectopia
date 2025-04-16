@@ -2,10 +2,6 @@ import { Navigate, Route, Routes } from "react-router"
 import MainLayout from "../Layouts/mainLayout"
 import Home from "../PAGES/Home/home"
 import Login from "../PAGES/Login/login"
-import Profile from "../PAGES/ProfilePage/Profile"
-import UserProfile from "../PAGES/ProfilePage/userProfile"
-import CreatePost from "../PAGES/Posts/createPost"
-import FeaturedPost from "../PAGES/FeaturedPosts/allPosts"
 import { useAuthStore } from "../Store/useAuthStore"
 import { useEffect } from "react"
 import { Loader } from "lucide-react"
@@ -37,7 +33,6 @@ function App() {
         <Route path="/home" element={authUser?<Home />:<Navigate to={'/login'}/>} />
         <Route path="/login" element={!authUser?<Login />:<Navigate to={'/home'}/>} />
         <Route path="/signup" element={!authUser?<SignUpPage/>:<Navigate to={'/home'}/>} />
-        <Route path="/featuredPost" element={<FeaturedPost />} />
         <Route path="/profile" element={authUser?<ProfilePage/>:<Navigate to={'/login'}/>}/>
         <Route path="/chats" element={authUser?<ChatHomePage/>:<Navigate to={'/login'}/>}/>
       </Route>

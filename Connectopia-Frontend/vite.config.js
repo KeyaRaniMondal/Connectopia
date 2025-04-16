@@ -8,5 +8,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-
+  optimizeDeps: {
+    include: ['@radix-ui/react-avatar']
+  }
 })

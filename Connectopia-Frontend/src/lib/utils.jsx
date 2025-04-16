@@ -5,3 +5,9 @@ export function formatMessageTime(date) {
       hour12: false,
     });
   }
+
+
+// utils.js
+export function cn(...classes) {
+  return classes.filter(Boolean).join(" ");
+}

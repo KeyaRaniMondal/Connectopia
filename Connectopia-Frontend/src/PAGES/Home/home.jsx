@@ -1,7 +1,15 @@
 import React from 'react'
+import NewPostForm from '../Posts/newPost'
+import PostCard from '../Posts/postCard'
 
-export default function Home() {
+const Home=()=> {
   return (
-    <div></div>
+    <div>
+<NewPostForm></NewPostForm>
+<PostCard></PostCard>
+    </div>
   )
 }
+export default Home
+
+
