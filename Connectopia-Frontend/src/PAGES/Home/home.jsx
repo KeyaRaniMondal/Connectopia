@@ -1,12 +1,12 @@
 import React from 'react'
-import NewPostForm from '../Posts/newPost'
 import PostCard from '../Posts/postCard'
+import CreatePost from '../Posts/createPost'
 
 const Home=()=> {
   return (
-    <div>
-<NewPostForm></NewPostForm>
-<PostCard></PostCard>
+    <div className='mt-20'>
+<CreatePost></CreatePost>
+
     </div>
   )
 }
