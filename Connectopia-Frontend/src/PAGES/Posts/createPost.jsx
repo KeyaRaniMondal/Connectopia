@@ -1,4 +1,5 @@
 import { useAuthStore } from "../../Store/useAuthStore"
+import PostForm from "./postForm"
 
 const CreatePost = () => {
     const { authUser } = useAuthStore()
@@ -20,8 +21,7 @@ const CreatePost = () => {
                             <form method="dialog">
                                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                             </form>
-                            <h3 className="font-bold text-lg">Hello!</h3>
-                            <p className="py-4">Press ESC key or click on ✕ button to close</p>
+                           <PostForm ></PostForm>
                         </div>
                     </dialog>
                 </div>
