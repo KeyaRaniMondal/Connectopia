@@ -6,7 +6,7 @@ const Home=()=> {
   return (
     <div className='mt-20'>
 <CreatePost></CreatePost>
-
+<PostCard></PostCard>
     </div>
   )
 }
