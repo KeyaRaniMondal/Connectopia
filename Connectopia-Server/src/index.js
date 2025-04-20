@@ -146,6 +146,7 @@
 //     // await client.close();
 //   }
 // }
+
 // run().catch(console.dir);
 
 // app.get('/', (req, res) => {
@@ -161,6 +162,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import authRoutes from '../src/routes/auth.route.js';
+import postRoutes from '../src/routes/postRoutes.js';
 import messageRoutes from '../src/routes/message.route.js';
 import { Connectopia } from './lib/db.js';
 
@@ -180,6 +182,7 @@ app.use(cors({
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/posts", postRoutes);
 app.use("/api/messages", messageRoutes);
 
 app.listen(PORT, () => {
