@@ -1,66 +1,46 @@
 import { create } from "zustand";
 import toast from "react-hot-toast";
 import { axiosInstance } from "../lib/axios";
-import { useAuthStore } from "./useAuthStore";
 
 export const usePostStore = create((set, get) => ({
-  users: [],
-  selectedUser: null,
-  isUsersLoading: false,
+  posts: [],
+  isPostsLoading: false,
 
-  getUsers: async () => {
-    set({ isUsersLoading: true });
+  // Fetch all posts
+  getPosts: async () => {
+    set({ isPostsLoading: true });
     try {
-      const res = await axiosInstance.get("/post/users");
-      set({ users: res.data });
+      const res = await axiosInstance.get("/posts/feed");
+      set({ posts: res.data });
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message || "Failed to load posts");
     } finally {
-      set({ isUsersLoading: false });
+      set({ isPostsLoading: false });
     }
   },
 
-  getMessages: async (userId) => {
-    set({ isMessagesLoading: true });
+  // Create a new post
+  createPost: async (postData) => {
     try {
-      const res = await axiosInstance.get(`/messages/${userId}`);
-      set({ messages: res.data });
+      const res = await axiosInstance.post("/posts/create", postData); 
+
+      set({ posts: [res.data, ...get().posts] }); // add new post to top
+      toast.success("Post created successfully");
     } catch (error) {
-      toast.error(error.response.data.message);
-    } finally {
-      set({ isMessagesLoading: false });
+      toast.error(error?.response?.data?.message || "Failed to create post");
     }
   },
-  sendMessage: async (messageData) => {
-    const { selectedUser, messages } = get();
+
+
+
+  // Optionally add deletePost or updatePost here
+  deletePost: async (postId) => {
     try {
-      const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`, messageData);
-      set({ messages: [...messages, res.data] });
+      await axiosInstance.delete(`/posts/${postId}`);
+      set({ posts: get().posts.filter(post => post._id !== postId) });
+      toast.success("Post deleted");
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message || "Failed to delete post");
     }
   },
-
-  subscribeToMessages: () => {
-    const { selectedUser } = get();
-    if (!selectedUser) return;
-
-    // const socket = useAuthStore.getState().socket;
-
-    // socket.on("newMessage", (newMessage) => {
-    //   const isMessageSentFromSelectedUser = newMessage.senderId === selectedUser._id;
-      if (!isMessageSentFromSelectedUser) return;
-
-      set({
-        messages: [...get().messages, newMessage],
-      });
-    // });
-  },
-
-  // unsubscribeFromMessages: () => {
-  //   const socket = useAuthStore.getState().socket;
-  //   socket.off("newMessage");
-  // },
-
-  setSelectedUser: (selectedUser) => set({ selectedUser }),
 }));

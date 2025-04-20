@@ -3,20 +3,49 @@ import { PlusIcon } from "lucide-react"
 import { useAuthStore } from "../../Store/useAuthStore"
 import EmojiPicker from "emoji-picker-react"
 import { MdEmojiEmotions } from "react-icons/md"
+import toast from "react-hot-toast"
+import { usePostStore } from "../../Store/usePostStore"
 
 const PostForm = () => {
     const { authUser } = useAuthStore()
+    const { createPost } = usePostStore();
     const fileInputRef = useRef(null)
     const [showEmojiPicker, setShowEmojiPicker] = useState(false)
+    const [text, setText] = useState("")
+    const [image, setImage] = useState(null)
 
     const handleFileClick = () => {
-        if (fileInputRef.current) {
-            fileInputRef.current.click()
+        if (fileInputRef.current) fileInputRef.current.click()
+    }
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0]
+        if (file) {
+            const reader = new FileReader()
+            reader.onloadend = () => {
+                setImage(reader.result) // base64 image
+            }
+            reader.readAsDataURL(file)
         }
     }
 
+
+    const handlePostSubmit = async () => {
+        if (!text.trim()) return toast.error("Text is required");
+
+       await createPost({
+            postedBy: authUser._id,
+            text,
+            img: image,
+        });
+
+        document.getElementById('my_modal_3').close();
+        setText("");
+        setImage(null);
+    };
+
     return (
-        <div className="">
+        <div>
             <h2 className="text-xl text-center">Create Post</h2>
             <div className="divider divider-neutral"></div>
 
@@ -30,10 +59,11 @@ const PostForm = () => {
             </div>
 
             <textarea
-                type="text"
-                placeholder={`What's on your mind ? ${authUser.fullName}`}
+                placeholder={`What's on your mind? ${authUser.fullName}`}
                 className="textarea textarea-neutral w-full"
-            ></textarea>
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+            />
 
             <div
                 className="w-full h-28 mt-5 border border-dashed flex items-center justify-center cursor-pointer"
@@ -43,12 +73,15 @@ const PostForm = () => {
                     type="file"
                     ref={fileInputRef}
                     className="hidden"
+                    onChange={handleFileChange}
                 />
                 <div className="text-center">
-                    <PlusIcon className="w-6 h-6 " />
+                    <PlusIcon className="w-6 h-6" />
                     <h2 className="text-lg -ml-14">Add Photos/Videos</h2>
                 </div>
             </div>
+
+            {image && <img src={image} alt="preview" className="mt-2 max-h-60" />}
 
             <div className="w-full h-28 bg-neutral-800 mt-5 p-3 relative">
                 <h2 className="text-md mb-2 text-white">Add to your post</h2>
@@ -60,12 +93,13 @@ const PostForm = () => {
                     />
                     {showEmojiPicker && (
                         <div className="absolute top-16 z-10">
-                            <EmojiPicker />
+                            <EmojiPicker onEmojiClick={(emojiData) => setText(prev => prev + emojiData.emoji)} />
                         </div>
                     )}
-                    <button className="btn btn-soft btn-warning">Post</button>
+                    <button className="btn btn-soft btn-warning" onClick={handlePostSubmit}>
+                        Post
+                    </button>
                 </div>
-
             </div>
         </div>
     )
