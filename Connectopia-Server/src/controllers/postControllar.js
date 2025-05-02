@@ -4,20 +4,16 @@ import { v2 as cloudinary } from "cloudinary";
 
 const createPost = async (req, res) => {
     try {
-        const { postedBy, text } = req.body;
+        const { text } = req.body;
         let { img } = req.body;
 
-        if (!postedBy || !text) {
-            return res.status(400).json({ error: "Postedby and text fields are required" });
+        if (!text) {
+            return res.status(400).json({ error: "Text field is required" });
         }
 
-        const user = await User.findById(postedBy);
+        const user = await User.findById(req.user._id);
         if (!user) {
             return res.status(404).json({ error: "User not found" });
-        }
-
-        if (user._id.toString() !== req.user._id.toString()) {
-            return res.status(401).json({ error: "Unauthorized to create post" });
         }
 
         const maxLength = 500;
@@ -30,15 +26,24 @@ const createPost = async (req, res) => {
             img = uploadedResponse.secure_url;
         }
 
-        const newPost = new Post({ postedBy, text, img });
-        await newPost.save();
+        const newPost = new Post({
+            postedBy: {
+                _id: user._id,
+                username: user.username,
+                profilePic: user.profilePic,
+            },
+            text,
+            img,
+        });
 
+        await newPost.save();
         res.status(201).json(newPost);
     } catch (err) {
         res.status(500).json({ error: err.message });
         console.log(err);
     }
 };
+
 
 const getPost = async (req, res) => {
     try {
