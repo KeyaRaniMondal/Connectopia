@@ -6,7 +6,6 @@ export const usePostStore = create((set, get) => ({
   posts: [],
   isPostsLoading: false,
 
-  // Fetch all posts
   getPosts: async () => {
     set({ isPostsLoading: true });
     try {
@@ -19,28 +18,30 @@ export const usePostStore = create((set, get) => ({
     }
   },
 
-  // Create a new post
-  createPost: async (postData) => {
-    try {
-      const res = await axiosInstance.post("/posts/create", postData); 
+  
+  createPost: async ({ text, img }) => {
+    if (!text || !text.trim()) {
+      throw new Error("Text is required");
+    }
 
-      set({ posts: [res.data, ...get().posts] }); // add new post to top
-      toast.success("Post created successfully");
+    try {
+      const res = await axiosInstance.post("/posts/create", { text, img });
+      set({ posts: [res.data, ...get().posts] });
+      return res.data;
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Failed to create post");
+      throw new Error(error?.response?.data?.error || "Failed to create post");
     }
   },
 
 
 
-  // Optionally add deletePost or updatePost here
   deletePost: async (postId) => {
     try {
       await axiosInstance.delete(`/posts/${postId}`);
-      set({ posts: get().posts.filter(post => post._id !== postId) });
+      set({ posts: get().posts.filter((p) => p._id !== postId) });
       toast.success("Post deleted");
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Failed to delete post");
+      toast.error(error?.response?.data?.error || "Failed to delete post");
     }
   },
 }));

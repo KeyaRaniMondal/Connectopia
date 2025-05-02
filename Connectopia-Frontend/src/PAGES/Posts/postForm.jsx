@@ -1,48 +1,52 @@
-import { useRef, useState } from "react"
-import { PlusIcon } from "lucide-react"
-import { useAuthStore } from "../../Store/useAuthStore"
-import EmojiPicker from "emoji-picker-react"
-import { MdEmojiEmotions } from "react-icons/md"
-import toast from "react-hot-toast"
-import { usePostStore } from "../../Store/usePostStore"
+import { useRef, useState } from "react";
+import { PlusIcon } from "lucide-react";
+import { useAuthStore } from "../../Store/useAuthStore";
+import EmojiPicker from "emoji-picker-react";
+import { MdEmojiEmotions } from "react-icons/md";
+import toast from "react-hot-toast";
+import { usePostStore } from "../../Store/usePostStore";
 
 const PostForm = () => {
-    const { authUser } = useAuthStore()
+    const { authUser } = useAuthStore();
     const { createPost } = usePostStore();
-    const fileInputRef = useRef(null)
-    const [showEmojiPicker, setShowEmojiPicker] = useState(false)
-    const [text, setText] = useState("")
-    const [image, setImage] = useState(null)
+
+    const fileInputRef = useRef(null);
+    const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+    const [text, setText] = useState("");
+    const [image, setImage] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleFileClick = () => {
-        if (fileInputRef.current) fileInputRef.current.click()
-    }
+        if (fileInputRef.current) fileInputRef.current.click();
+    };
 
     const handleFileChange = (e) => {
-        const file = e.target.files[0]
+        const file = e.target.files[0];
         if (file) {
-            const reader = new FileReader()
+            const reader = new FileReader();
             reader.onloadend = () => {
-                setImage(reader.result) // base64 image
-            }
-            reader.readAsDataURL(file)
+                setImage(reader.result); // base64 image
+            };
+            reader.readAsDataURL(file);
         }
-    }
-
+    };
 
     const handlePostSubmit = async () => {
-        if (!text.trim()) return toast.error("Text is required");
-
-       await createPost({
-            postedBy: authUser._id,
-            text,
-            img: image,
-        });
-
-        document.getElementById('my_modal_3').close();
-        setText("");
-        setImage(null);
+        try {
+            await createPost({
+                text,
+                img: image,
+            });
+            toast.success("Post created successfully");
+            setText("");
+            setImage(null);
+            setShowEmojiPicker(false);
+            document.getElementById("my_modal_3")?.close();
+        } catch (error) {
+            toast.error(error.message);
+        }
     };
+
 
     return (
         <div>
@@ -89,20 +93,28 @@ const PostForm = () => {
                     <MdEmojiEmotions
                         size={24}
                         className="text-yellow-400 cursor-pointer"
-                        onClick={() => setShowEmojiPicker(prev => !prev)}
+                        onClick={() => setShowEmojiPicker((prev) => !prev)}
                     />
                     {showEmojiPicker && (
                         <div className="absolute top-16 z-10">
-                            <EmojiPicker onEmojiClick={(emojiData) => setText(prev => prev + emojiData.emoji)} />
+                            <EmojiPicker
+                                onEmojiClick={(emojiData) =>
+                                    setText((prev) => prev + emojiData.emoji)
+                                }
+                            />
                         </div>
                     )}
-                    <button className="btn btn-soft btn-warning" onClick={handlePostSubmit}>
-                        Post
+                    <button
+                        className="btn btn-soft btn-warning"
+                        onClick={handlePostSubmit}
+                        disabled={loading}
+                    >
+                        {loading ? "Posting..." : "Post"}
                     </button>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default PostForm
+export default PostForm;
