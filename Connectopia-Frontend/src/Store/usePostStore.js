@@ -6,6 +6,8 @@ export const usePostStore = create((set, get) => ({
   posts: [],
   isPostsLoading: false,
 
+  setPosts: (newPosts) => set({ posts: newPosts }),//setting updated posts in the store
+
   getPosts: async () => {
     set({ isPostsLoading: true });
     try {
