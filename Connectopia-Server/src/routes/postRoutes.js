@@ -7,6 +7,7 @@ import {
     replyToPost,
     getFeedPosts,
     getUserPosts,
+    sharePost,
 } from "../controllers/postControllar.js";
 import protectRoute from "../middleware/auth.middleware.js";
 
@@ -19,5 +20,6 @@ router.post("/create", protectRoute, createPost);
 router.delete("/:id", protectRoute, deletePost);
 router.put("/likes/:id", protectRoute, likeUnlikePost);
 router.put("/reply/:id", protectRoute, replyToPost);
+router.post("/share/:originalPostId", protectRoute, sharePost);
 
 export default router;

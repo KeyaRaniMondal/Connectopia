@@ -14,6 +14,14 @@ const postSchema = mongoose.Schema(
         img: {
             type: String,
         },
+        sharedFrom: {
+            _id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Post",
+            },
+            username: String,
+        },
+
         likes: {
             type: [mongoose.Schema.Types.ObjectId],
             ref: "User",

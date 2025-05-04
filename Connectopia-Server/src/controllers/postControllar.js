@@ -59,6 +59,45 @@ const getPost = async (req, res) => {
     }
 };
 
+
+//share post
+
+const sharePost = async (req, res) => {
+    try {
+        const { originalPostId } = req.params;
+
+        const originalPost = await Post.findById(originalPostId);
+        if (!originalPost) {
+            return res.status(404).json({ error: "Original post not found" });
+        }
+
+        const user = await User.findById(req.user._id);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        const sharedPost = new Post({
+            postedBy: {
+                _id: user._id,
+                username: user.username,
+                profilePic: user.profilePic,
+            },
+            text: originalPost.text,
+            img: originalPost.img,
+            sharedFrom: {
+                _id: originalPost._id,
+                username: originalPost.postedBy.username,
+            },
+        });
+
+        await sharedPost.save();
+        res.status(201).json(sharedPost);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+
 const deletePost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
@@ -185,4 +224,4 @@ const getUserPosts = async (req, res) => {
     }
 };
 
-export { createPost, getPost, deletePost, likeUnlikePost, replyToPost, getFeedPosts, getUserPosts };
+export { createPost, getPost, deletePost, likeUnlikePost, replyToPost, getFeedPosts, getUserPosts,sharePost };
