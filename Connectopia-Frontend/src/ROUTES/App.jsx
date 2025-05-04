@@ -10,6 +10,7 @@ import SignUpPage from "../PAGES/Login/register"
 import { Toaster } from "react-hot-toast"
 import ProfilePage from "../PAGES/ProfilePage/Profile"
 import ChatHomePage from "../PAGES/Chats/chatHome"
+import SettingsPage from "../PAGES/SettingsPage/settingsPage"
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="/signup" element={!authUser?<SignUpPage/>:<Navigate to={'/home'}/>} />
         <Route path="/profile" element={authUser?<ProfilePage/>:<Navigate to={'/login'}/>}/>
         <Route path="/chats" element={authUser?<ChatHomePage/>:<Navigate to={'/login'}/>}/>
+        <Route path="/settings" element={<SettingsPage/>}/>
       </Route>
 
         {/*<Route index element={<UserProfile />} />

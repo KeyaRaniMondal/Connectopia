@@ -111,7 +111,7 @@ const PostCard = ({ post }) => {
                 {showShareMenu && (
                     <div className="bg-white rounded-lg shadow-xl p-4 mt-2 w-80 mx-auto flex flex-col gap-3 relative z-50 border border-gray-200">
                         <div className="flex justify-between items-center border-b pb-2">
-                            <h3 className="font-semibold text-lg">Share this post</h3>
+                            <h3 className="font-semibold text-lg text-black">Share this post</h3>
                             <button
                                 onClick={() => setShowShareMenu(false)}
                                 className="text-gray-500 hover:text-gray-700"
@@ -168,15 +168,15 @@ const PostCard = ({ post }) => {
                                 className="flex items-center gap-3 p-2 hover:bg-gray-100 rounded cursor-pointer"
                                 onClick={handleCopyLink}
                             >
-                                <Link size={18} className="text-gray-600" />
-                                <span>Copy link</span>
+                                <Link size={18} className="text-black" />
+                                <span className="text-black">Copy link</span>
                             </div>
                             <div
                                 className="flex items-center gap-3 p-2 hover:bg-gray-100 rounded cursor-pointer"
                                 onClick={handleShareViaEmail}
                             >
-                                <Mail size={18} className="text-gray-600" />
-                                <span>Share via email</span>
+                                <Mail size={18} className="text-black" />
+                                <span className="text-black">Share via email</span>
                             </div>
                         </div>
                     </div>
