@@ -4,6 +4,9 @@ import { v2 as cloudinary } from "cloudinary";
 
 const createPost = async (req, res) => {
     try {
+        const userId = req.user._id;
+        const userProfilePic = req.user.profilePic;
+        const username = req.user.username;
         const { text } = req.body;
         let { img } = req.body;
 
@@ -28,9 +31,7 @@ const createPost = async (req, res) => {
 
         const newPost = new Post({
             postedBy: {
-                _id: user._id,
-                username: user.username,
-                profilePic: user.profilePic,
+                userId, userProfilePic, username
             },
             text,
             img,

@@ -3,10 +3,15 @@ import mongoose from "mongoose";
 const postSchema = mongoose.Schema(
     {
         postedBy: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
-            required: true,
+            userId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
+                required: true
+            },
+            username: String,
+            userProfilePic: String
         },
+
         text: {
             type: String,
             maxLength: 500,

@@ -1,0 +1,22 @@
+{
+  "name": "connectopia",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build":"npm install --prefix Connectopia-Server && npm install --prefix Connectopia-Frontend && npm run build --prefix Connectopia-Frontend",
+    "start": "npm run start --prefix Connectopia-Server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KeyaRaniMondal/Connectopia.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KeyaRaniMondal/Connectopia/issues"
+  },
+  "homepage": "https://github.com/KeyaRaniMondal/Connectopia#readme",
+  "description": ""
+}
