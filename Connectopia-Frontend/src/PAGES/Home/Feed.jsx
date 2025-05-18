@@ -8,7 +8,7 @@ import { axiosInstance } from '../../lib/axios';
 const Feed = () => {
     const { posts, isPostsLoading, getPosts } = usePostStore();
     axiosInstance.interceptors.request.use((config) => {
-        const token = localStorage.getItem("token"); // or however you store it
+        const token = localStorage.getItem("token");
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
