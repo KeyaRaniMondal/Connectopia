@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from '../assets/logo.JPG'
+import logo from '../assets/logo.jpg';
 import { HomeIcon, LogOut, MessageSquare, Settings, User } from "lucide-react";
 import { IoLogoWechat } from "react-icons/io5";
 import { useAuthStore } from "../Store/useAuthStore";
