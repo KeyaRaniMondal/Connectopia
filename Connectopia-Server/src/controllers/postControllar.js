@@ -48,17 +48,20 @@ const createPost = async (req, res) => {
 
 const getPost = async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id);
+        const posts = await Post.find()
+            .sort({ createdAt: -1 })
+            .populate("postedBy", "fullName profilePic _id"); // ✅ populate user fields
 
-        if (!post) {
-            return res.status(404).json({ error: "Post not found" });
+        if (!posts || posts.length === 0) {
+            return res.status(404).json({ error: "No posts found" });
         }
 
-        res.status(200).json(post);
+        res.status(200).json(posts); // ✅ send populated posts once
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 };
+
 
 
 //share post

@@ -2,6 +2,7 @@ import { useAuthStore } from "../../Store/useAuthStore";
 
 const PostHeader = ({ postMessage }) => {
   const { User } = useAuthStore();
+  const { authUser } = useAuthStore();
 
   const isOwner =
     String(User?._id) === String(postMessage?.postedBy?.userId);
@@ -13,15 +14,15 @@ const PostHeader = ({ postMessage }) => {
           <div className="avatar">
             <div className="size-10 rounded-full relative">
               <img
-                src={postMessage?.postedBy?.userProfilePic || "/avatar.png"}
-                alt={postMessage?.postedBy?.username || "User Avatar"}
+                src={authUser?.profilePic || "/avatar.png"}
+                alt={authUser?.fullName || "User Avatar"}
               />
             </div>
           </div>
 
           <div>
             <h3 className="font-medium">
-              {postMessage?.postedBy?.username || "Anonymous"}
+              {authUser?.fullName || "Anonymous"}
               {isOwner && (
                 <span className="ml-1 text-xs text-green-400">(you)</span>
               )}

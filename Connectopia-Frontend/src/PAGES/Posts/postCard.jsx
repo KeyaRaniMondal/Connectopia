@@ -25,7 +25,7 @@ const PostCard = ({ post }) => {
     const [liked, setLiked] = useState(post.likes?.includes(user?._id));
     const [isLiking, setIsLiking] = useState(false);
     const [showShareMenu, setShowShareMenu] = useState(false);
-    const [showCommentBox, setShowCommentBox] = useState(false); // ✅ New state
+    const [showCommentBox, setShowCommentBox] = useState(false); // comment state
 
     const [replyText, setReplyText] = useState("");
     const [isReplying, setIsReplying] = useState(false);
@@ -111,7 +111,7 @@ const PostCard = ({ post }) => {
         <div className='mt-20'>
             <PostHeader post={post} />
             <div>
-                <h2 className="text-lg">{post.text}</h2>
+                <h2 className="text-lg w-[700px]">{post.text}</h2>
                 {post.img && (
                     <img
                         src={post.img}
