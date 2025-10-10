@@ -6,7 +6,7 @@ const createPost = async (req, res) => {
     try {
         const userId = req.user._id;
         const userProfilePic = req.user.profilePic;
-        const username = req.user.username;
+        const username = req.user.fullName; // store display name
         const { text } = req.body;
         let { img } = req.body;
 
@@ -49,8 +49,7 @@ const createPost = async (req, res) => {
 const getPost = async (req, res) => {
     try {
         const posts = await Post.find()
-            .sort({ createdAt: -1 })
-            .populate("postedBy", "fullName profilePic _id"); // ✅ populate user fields
+            .sort({ createdAt: -1 });
 
         if (!posts || posts.length === 0) {
             return res.status(404).json({ error: "No posts found" });
@@ -160,7 +159,7 @@ const replyToPost = async (req, res) => {
         const postId = req.params.id;
         const userId = req.user._id;
         const userProfilePic = req.user.profilePic;
-        const username = req.user.username;
+        const username = req.user.fullName;
 
         if (!text) {
             return res.status(400).json({ error: "Text field is required" });

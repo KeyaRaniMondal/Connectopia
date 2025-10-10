@@ -1,11 +1,8 @@
 import { useAuthStore } from "../../Store/useAuthStore";
 
-const PostHeader = ({ postMessage }) => {
-  const { User } = useAuthStore();
+const PostHeader = ({ post }) => {
   const { authUser } = useAuthStore();
-
-  const isOwner =
-    String(User?._id) === String(postMessage?.postedBy?.userId);
+  const isOwner = String(authUser?._id) === String(post?.postedBy?.userId);
 
   return (
     <div className="p-2.5 border-b border-base-300 bg-black w-[700px] flex mx-auto">
@@ -13,16 +10,13 @@ const PostHeader = ({ postMessage }) => {
         <div className="flex items-center gap-3">
           <div className="avatar">
             <div className="size-10 rounded-full relative">
-              <img
-                src={authUser?.profilePic || "/avatar.png"}
-                alt={authUser?.fullName || "User Avatar"}
-              />
+              <img src={post?.postedBy?.userProfilePic || "/avatar.png"} alt={post?.postedBy?.username || "User Avatar"} />
             </div>
           </div>
 
           <div>
             <h3 className="font-medium">
-              {authUser?.fullName || "Anonymous"}
+              {post?.postedBy?.username || "Anonymous"}
               {isOwner && (
                 <span className="ml-1 text-xs text-green-400">(you)</span>
               )}
