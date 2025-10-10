@@ -6,10 +6,11 @@ export const generateToken = (userId, res) => {
     });
 
     // ✅ Ensure `httpOnly` flag for security
+    const isProd = process.env.NODE_ENV === "production";
     res.cookie("jwt", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production", // Set to true in production
-        sameSite: "strict",
+        secure: isProd,
+        sameSite: isProd ? "strict" : "lax",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 };

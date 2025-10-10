@@ -1,28 +1,17 @@
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import splashScreen from '../../assets/splashScreen.jpg'
 import { TypeAnimation } from 'react-type-animation'
-// import useAuth from '../../hooks/useAuth'
-import { Link, useNavigate } from 'react-router' 
-// import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-// import { useContext } from 'react'
-// import { AuthContext } from '../../Provider/AuthProvider'
+import { Link, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useAuthStore } from '../../Store/useAuthStore'
 
 const SplashScreen= () => {
-    // const { googleSignIn } = useContext(AuthContext)
-    // const navigate = useNavigate()
-        // const auth = getAuth();
-        // const provider = new GoogleAuthProvider();
-    
-        // const handleGoogleSignIn = () => {
-        //     signInWithPopup(auth, provider)
-        //         .then((result) => {
-        //             alert("Google sign-in successful!");
-        //             navigate("/");
-        //         })
-        //         .catch((err) => {
-        //             alert(err.message);
-        //         });
-        // };
+    const navigate = useNavigate()
+    const { loginWithGoogle, isGoogleAuthLoading, authUser } = useAuthStore()
+
+    useEffect(() => {
+        if (authUser) navigate("/")
+    }, [authUser, navigate])
 
     
     return (
@@ -66,8 +55,8 @@ const SplashScreen= () => {
                             </Link>
                         </div>
                         <div className='mb-5'>
-                        {/* onClick={googleSignIn} */}
-                            <button  className="btn bg-[#ffffff] text-black border-[#0b5014] w-60">
+                           
+                            <button onClick={loginWithGoogle} disabled={isGoogleAuthLoading} className="btn bg-[#ffffff] text-black border-[#0b5014] w-60">
                                 <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                     <g>
                                         <path d="m0 0H512V512H0" fill="#fff"></path>
@@ -77,7 +66,7 @@ const SplashScreen= () => {
                                         <path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path>
                                     </g>
                                 </svg>
-                                Login with Google
+                                {isGoogleAuthLoading ? 'Connecting…' : 'Login with Google'}
                             </button>
                         </div>
                         <div>

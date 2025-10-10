@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
+import { signInWithGoogle } from "../lib/firebaseAuth";
 
 
 const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:5001" : "/";
@@ -9,6 +10,7 @@ export const useAuthStore = create((set, get) => ({
   authUser: null,
   isSigningUp: false,
   isLoggingIn: false,
+  isGoogleAuthLoading: false,
   isUpdatingProfile: false,
   isCheckingAuth: true,
   onlineUsers: [],
@@ -46,12 +48,29 @@ export const useAuthStore = create((set, get) => ({
       const res = await axiosInstance.post("/auth/login", data);
       set({ authUser: res.data });
       toast.success("Logged in successfully");
-
-      get().connectSocket();
+      get().connectSocket?.();
     } catch (error) {
-      // toast.error(error.response.data.message);
+      const message = error?.response?.data?.message || error?.message || "Login failed";
+      toast.error(message);
     } finally {
       set({ isLoggingIn: false });
+    }
+  },
+
+  loginWithGoogle: async () => {
+    set({ isGoogleAuthLoading: true });
+    try {
+      const result = await signInWithGoogle();
+      const idToken = await result.user.getIdToken();
+      const res = await axiosInstance.post("/auth/google", { idToken });
+      set({ authUser: res.data });
+      toast.success("Logged in with Google");
+      get().connectSocket?.();
+    } catch (error) {
+      const message = error?.response?.data?.message || error?.message || "Google auth failed";
+      toast.error(message);
+    } finally {
+      set({ isGoogleAuthLoading: false });
     }
   },
 
@@ -60,9 +79,10 @@ export const useAuthStore = create((set, get) => ({
       await axiosInstance.post("/auth/logout");
       set({ authUser: null });
       toast.success("Logged out successfully");
-      get().disconnectSocket();
+      get().disconnectSocket?.();
     } catch (error) {
-      toast.error(error.response.data.message);
+      const message = error?.response?.data?.message || error?.message || "Logout failed";
+      toast.error(message);
     }
   },
   updateProfile: async (data) => {

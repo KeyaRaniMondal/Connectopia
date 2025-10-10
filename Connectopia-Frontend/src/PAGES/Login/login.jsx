@@ -10,7 +10,7 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
-  const { login, isLoggingIn } = useAuthStore();
+  const { login, isLoggingIn, loginWithGoogle, isGoogleAuthLoading } = useAuthStore();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -96,6 +96,22 @@ const LoginPage = () => {
               )}
             </button>
           </form>
+
+          <div className="divider">or</div>
+          <button
+            onClick={loginWithGoogle}
+            disabled={isGoogleAuthLoading}
+            className="btn btn-outline w-full"
+          >
+            {isGoogleAuthLoading ? (
+              <>
+                <Loader2 className="h-5 w-5 animate-spin" />
+                Continue with Google
+              </>
+            ) : (
+              "Continue with Google"
+            )}
+          </button>
 
           <div className="text-center">
             <p className="text-base-content/60">

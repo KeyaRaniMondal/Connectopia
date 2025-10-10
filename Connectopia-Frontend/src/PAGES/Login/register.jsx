@@ -110,7 +110,7 @@ const SignUpPage = () => {
     password: "",
   });
 
-  const { signup, isSigningUp } = useAuthStore();
+  const { signup, isSigningUp, loginWithGoogle, isGoogleAuthLoading } = useAuthStore();
 
   const validateForm = () => {
     if (!formData.fullName.trim()) return toast.error("Full name is required");
@@ -226,6 +226,22 @@ const SignUpPage = () => {
               )}
             </button>
           </form>
+
+          <div className="divider">or</div>
+          <button
+            onClick={loginWithGoogle}
+            disabled={isGoogleAuthLoading}
+            className="btn btn-outline w-full"
+          >
+            {isGoogleAuthLoading ? (
+              <>
+                <Loader2 className="size-5 animate-spin" />
+                Continue with Google
+              </>
+            ) : (
+              "Continue with Google"
+            )}
+          </button>
 
           <div className="text-center">
             <p className="text-base-content/60">
