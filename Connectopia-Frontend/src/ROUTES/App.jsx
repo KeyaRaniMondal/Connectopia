@@ -11,6 +11,7 @@ import { Toaster } from "react-hot-toast"
 import ProfilePage from "../PAGES/ProfilePage/Profile"
 import ChatHomePage from "../PAGES/Chats/chatHome"
 import SettingsPage from "../PAGES/SettingsPage/settingsPage"
+import ThemeProvider from "../Components/ThemeProvider"
 
 function App() {
 
@@ -27,26 +28,26 @@ function App() {
       </div>
     );
   return (
-    <div>
-<Routes>
-      <Route path="/" element={<MainLayout />}>
-      <Route path="/" element={!authUser?<SplashScreen />:<Navigate to={'/home'}/>} />
-        <Route path="/home" element={authUser?<Home />:<Navigate to={'/login'}/>} />
-        <Route path="/login" element={!authUser?<Login />:<Navigate to={'/home'}/>} />
-        <Route path="/signup" element={!authUser?<SignUpPage/>:<Navigate to={'/home'}/>} />
-        <Route path="/profile" element={authUser?<ProfilePage/>:<Navigate to={'/login'}/>}/>
-        <Route path="/chats" element={authUser?<ChatHomePage/>:<Navigate to={'/login'}/>}/>
-        <Route path="/settings" element={<SettingsPage/>}/>
-      </Route>
+    <ThemeProvider>
+      <div>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route path="/" element={!authUser?<SplashScreen />:<Navigate to={'/home'}/>} />
+            <Route path="/home" element={authUser?<Home />:<Navigate to={'/login'}/>} />
+            <Route path="/login" element={!authUser?<Login />:<Navigate to={'/home'}/>} />
+            <Route path="/signup" element={!authUser?<SignUpPage/>:<Navigate to={'/home'}/>} />
+            <Route path="/profile" element={authUser?<ProfilePage/>:<Navigate to={'/login'}/>}/>
+            <Route path="/chats" element={authUser?<ChatHomePage/>:<Navigate to={'/login'}/>}/>
+            <Route path="/settings" element={<SettingsPage/>}/>
+          </Route>
 
-        {/*<Route index element={<UserProfile />} />
-        <Route path="/createPost" element={<CreatePost />} />
-      </Route> */}
-    </Routes>
-    <Toaster/>
-    </div>
-    
-    
+          {/*<Route index element={<UserProfile />} />
+          <Route path="/createPost" element={<CreatePost />} />
+        </Route> */}
+        </Routes>
+        <Toaster/>
+      </div>
+    </ThemeProvider>
   )
   
 }

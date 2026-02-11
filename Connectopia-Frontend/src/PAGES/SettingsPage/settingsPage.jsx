@@ -23,8 +23,8 @@ const SettingsPage = () => {
             <button
               key={t}
               className={`
-                group flex flex-col items-center gap-1.5 p-2 rounded-lg transition-colors
-                ${theme === t ? "bg-base-200" : "hover:bg-base-200/50"}
+                group flex flex-col items-center gap-1.5 p-2 rounded-lg transition-colors border-2
+                ${theme === t ? "bg-base-200 border-primary" : "hover:bg-base-200/50 border-transparent"}
               `}
               onClick={() => setTheme(t)}
             >
@@ -49,7 +49,7 @@ const SettingsPage = () => {
           <div className="p-4 bg-base-200">
             <div className="max-w-lg mx-auto">
               {/* Mock Chat UI */}
-              <div className="bg-base-100 rounded-xl shadow-sm overflow-hidden">
+              <div className="bg-base-100 rounded-xl shadow-sm overflow-hidden" data-theme={theme}>
                 {/* Chat Header */}
                 <div className="px-4 py-3 border-b border-base-300 bg-base-100">
                   <div className="flex items-center gap-3">
