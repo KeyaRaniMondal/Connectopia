@@ -177,19 +177,27 @@ const __dirname = path.resolve();
 app.use(express.json({limit:"2mb"})); 
 app.use(express.urlencoded({extended:true,limit:"2mb"}))
 app.use(cookieParser());  
-const allowedOrigins = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-];
 
 app.use(cors({
-    origin: (origin, callback) => {
-        // allow requests with no origin (like mobile apps, curl)
+    origin: function(origin, callback) {
+        // Allow requests with no origin (like mobile apps, curl)
         if (!origin) return callback(null, true);
-        if (allowedOrigins.includes(origin)) return callback(null, true);
+        
+        // In development, allow all localhost and 127.0.0.1 requests
+        if (origin.includes("localhost") || origin.includes("127.0.0.1")) {
+            return callback(null, true);
+        }
+        
+        // Fallback for other origins in development
+        if (process.env.NODE_ENV !== "production") {
+            return callback(null, true);
+        }
+        
         return callback(new Error("Not allowed by CORS"));
     },
-    credentials: true
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 // Routes
