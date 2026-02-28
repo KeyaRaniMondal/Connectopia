@@ -2,7 +2,8 @@ import { generateToken } from "../lib/utils.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import cloudinary from "../lib/cloudinary.js";
-//import { OAuth2Client } from "google-auth-library";
+
+const googleClientId = process.env.GOOGLE_CLIENT_ID;
 
 // const googleClientId = process.env.GOOGLE_CLIENT_ID;
 // const googleClient = googleClientId ? new OAuth2Client(googleClientId) : null;
@@ -131,7 +132,12 @@ export const googleAuth = async (req, res) => {
       return res.status(500).json({ message: "Google client not configured" });
     }
 
-    const ticket = await googleClient.verifyIdToken({ idToken});
+    // const ticket = await googleClient.verifyIdToken({ idToken});
+    const ticket = await googleClient.verifyIdToken({
+  idToken,
+  audience: process.env.GOOGLE_CLIENT_ID,
+});
+
     const payload = ticket.getPayload();
     if (!payload) return res.status(401).json({ message: "Invalid Google token" });
 
