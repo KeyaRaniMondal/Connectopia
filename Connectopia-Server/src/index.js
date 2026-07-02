@@ -31,8 +31,12 @@ app.use(cors({
         // Allow requests with no origin (like mobile apps, curl)
         if (!origin) return callback(null, true);
         
-        // In development, allow all localhost and 127.0.0.1 requests
-        if (origin.includes("localhost") || origin.includes("127.0.0.1")) {
+        // Allow local development and the Render deployment origin
+        if (
+            origin.includes("localhost") ||
+            origin.includes("127.0.0.1") ||
+            origin.includes("connectopia-3.onrender.com")
+        ) {
             return callback(null, true);
         }
         
