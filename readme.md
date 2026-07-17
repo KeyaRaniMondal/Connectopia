@@ -1,7 +1,7 @@
 # 🌐 Connectopia
 
 <p align="center">
-  <img src="./preview.png" alt="Connectopia Preview" width="100%">
+![Home page](<Screenshot 2026-07-17 125508.png>)
 </p>
 
 ---
