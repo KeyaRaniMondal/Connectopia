@@ -1,7 +1,7 @@
 # 🌐 Connectopia
 
 <p align="center">
-![Home page](<Screenshot 2026-07-17 125508.png>)
+<img src='https://github.com/KeyaRaniMondal/Connectopia/blob/main/Screenshot%202026-07-17%20125508.png' alt='home page'/>
 </p>
 
 ---
